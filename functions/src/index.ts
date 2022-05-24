@@ -1,7 +1,16 @@
 import 'dotenv/config';
+// import * as functions from "firebase-functions";
 import cheerio from 'cheerio';
 import puppeteer from 'puppeteer';
 import nodemailer from 'nodemailer';
+
+// // Start writing Firebase Functions
+// // https://firebase.google.com/docs/functions/typescript
+//
+// export const helloWorld = functions.https.onRequest((request, response) => {
+//   functions.logger.info("Hello logs!", {structuredData: true});
+//   response.send("Hello from Firebase!");
+// });
 
 require('dotenv').config();
 
@@ -30,7 +39,7 @@ const main = () => {
 		const browser = await puppeteer.launch();
 		const page = await browser.newPage();
 		await page.goto(URL, {waitUntil: 'networkidle2'});
-		await page.screenshot({path: 'page.png'});
+		// await page.screenshot({path: 'page.png'});
 
 		const html = await page.evaluate(() => document.body.innerHTML);
 		const $ = cheerio.load(html);
