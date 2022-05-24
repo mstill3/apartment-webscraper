@@ -1,5 +1,6 @@
 {
   "functions": {
-    "predeploy": "npm --prefix functions run build"
+    "predeploy": "npm --prefix functions run build",
+    "runtime": "nodejs14"
   }
 }
