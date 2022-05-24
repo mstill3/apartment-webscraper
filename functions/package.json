@@ -1,14 +1,14 @@
 {
   "name": "apartment-webscraper",
   "version": "1.0.0",
-  "main": "app.ts",
+  "main": "index.ts",
   "repository": "https://github.com/mstill3/apartment-webscraper",
   "author": "Matt Stillwell <stillwell006@gmail.com>",
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "start": "node ./bin/app.js",
-    "dev": "ts-node ./src/app.ts"
+    "start": "node ./lib/index.js",
+    "dev": "ts-node src/index.ts"
   },
   "dependencies": {
     "@types/node": "^17.0.35",
