@@ -1,5 +1,5 @@
 // import * as functions from "firebase-functions";
-import cheerio from "cheerio";
+import {load} from "cheerio";
 import dotenv from "dotenv";
 import nodemailer from "nodemailer";
 import puppeteer from "puppeteer";
@@ -42,7 +42,7 @@ const main = () => {
     // await page.screenshot({path: 'page.png'});
 
     const html = await page.evaluate(() => document.body.innerHTML);
-    const $ = cheerio.load(html);
+    const $ = load(html);
 
     const models = $("div .model-info");
     models.each((index, model) => {
