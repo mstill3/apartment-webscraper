@@ -81,8 +81,8 @@ const main = () => {
 				term
 			}
 			console.log(apartment);
-			if (apartment.beds === DESIRED_NUM_BEDS &&
-				apartment.baths === DESIRED_NUM_BATHS &&
+			if (apartment.beds === parseInt(DESIRED_NUM_BEDS) &&
+				apartment.baths === parseInt(DESIRED_NUM_BATHS) &&
 				apartment.available) {
 				sendMail(apartment).catch(console.error);
 			}
