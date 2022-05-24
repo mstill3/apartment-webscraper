@@ -1,16 +1,9 @@
-// import * as functions from "firebase-functions";
-import {load} from "cheerio";
+import * as cheerio from "cheerio";
 import dotenv from "dotenv";
+import * as GCP from "firebase-functions";
 import nodemailer from "nodemailer";
 import puppeteer from "puppeteer";
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
 
 dotenv.config();
 
@@ -36,13 +29,13 @@ interface Apartment {
 
 const main = () => {
   (async () => {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({args: ["--no-sandbox"]});
     const page = await browser.newPage();
     await page.goto(URL, {waitUntil: "networkidle2"});
     // await page.screenshot({path: 'page.png'});
 
     const html = await page.evaluate(() => document.body.innerHTML);
-    const $ = load(html);
+    const $ = cheerio.load(html);
 
     const models = $("div .model-info");
     models.each((index, model) => {
@@ -152,5 +145,15 @@ Floor:\t\t${apartment.floor}`;
   // send mail with defined transport object
   await transporter.sendMail(mailOptions);
 };
+
+// For GCP
+const TOPIC = "trigger-webscraper";
+export const webscrape = GCP.runWith({
+  timeoutSeconds: 3 * 60,
+  memory: "8GB",
+}).pubsub.topic(TOPIC)
+    .onPublish((message: GCP.pubsub.Message) => {
+      main();
+    });
 
 main();
