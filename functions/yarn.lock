@@ -407,13 +407,6 @@
   resolved "https://registry.yarnpkg.com/@types/pretty/-/pretty-2.0.1.tgz#192426eb6f640239e3e0224f60ebec39d4e125e4"
   integrity sha512-l18spTC0Q2OEUIHGPyw37XBOacFI4Kng1fgfFjgDTg2FR9wqJ/NY9zWyXv87NRUlFDU6JA+E/GVnNJiWgyon6A==
 
-"@types/puppeteer@^5.4.6":
-  version "5.4.6"
-  resolved "https://registry.yarnpkg.com/@types/puppeteer/-/puppeteer-5.4.6.tgz#afc438e41dcbc27ca1ba0235ea464a372db2b21c"
-  integrity sha512-98Kghehs7+/GD9b56qryhqdqVCXUTbetTv3PlvDnmFRTHQH0j9DIp1f7rkAW3BAj4U3yoeSEQnKgdW8bDq0Y0Q==
-  dependencies:
-    "@types/node" "*"
-
 "@types/qs@*":
   version "6.9.7"
   resolved "https://registry.yarnpkg.com/@types/qs/-/qs-6.9.7.tgz#63bb7d067db107cc1e457c303bc25d511febf6cb"
@@ -2674,6 +2667,24 @@ punycode@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
+
+puppeteer-core@^14.1.1:
+  version "14.1.1"
+  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-14.1.1.tgz#d70ff37889f69846721a8fcf0e035e6928a8eddd"
+  integrity sha512-DWLzFcawn1ANg2Q06Eieing4Y0fdNI7miax3f+wEbdROzlMG4yXIWzmT6XTKyFyqOjMhW5QNIDdFJftK6oP4og==
+  dependencies:
+    cross-fetch "3.1.5"
+    debug "4.3.4"
+    devtools-protocol "0.0.982423"
+    extract-zip "2.0.1"
+    https-proxy-agent "5.0.1"
+    pkg-dir "4.2.0"
+    progress "2.0.3"
+    proxy-from-env "1.1.0"
+    rimraf "3.0.2"
+    tar-fs "2.1.1"
+    unbzip2-stream "1.4.3"
+    ws "8.6.0"
 
 puppeteer@^14.1.1:
   version "14.1.1"
