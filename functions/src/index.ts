@@ -29,6 +29,8 @@ interface Apartment {
 
 
 const main = async () => {
+  const response: { "models": Apartment[], "sent": number } =
+        {"models": [], "sent": 0};
   const browser = await puppeteer.launch({args: ["--no-sandbox"]});
   const page = await browser.newPage();
   await page.goto(URL, {waitUntil: "networkidle2"});
@@ -89,14 +91,17 @@ const main = async () => {
       term,
     };
     console.log(apartment);
+    response.models.push(apartment);
     if (apartment.beds === parseInt(DESIRED_NUM_BEDS) &&
             apartment.baths === parseInt(DESIRED_NUM_BATHS) &&
             apartment.available) {
       sendMail(apartment).catch(console.error);
+      response.sent += 1;
     }
   });
 
   await browser.close();
+  return response;
 };
 
 
@@ -146,14 +151,16 @@ Floor:\t\t${apartment.floor}`;
 };
 
 // For GCP
-const TOPIC = "trigger-webscraper";
 export const webscrape = GCP.runWith({
   timeoutSeconds: 3 * 60,
   memory: "8GB",
-}).pubsub.topic(TOPIC)
-    .onPublish((message: GCP.pubsub.Message) => {
-      main();
-      return 0;
-    });
+}).https.onRequest((req, resp) => {
+  main().then((result) => {
+    resp.send(JSON.stringify(result));
+  }).catch((error) => {
+    resp.send(error);
+  });
+});
+
 
 main();

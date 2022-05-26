@@ -7,14 +7,13 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
-    "dev": "yarn install-chrome && ts-node src/index.ts",
+    "dev": "ts-node src/index.ts",
     "build": "tsc",
     "serve": "npm run build && firebase emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions:webscrape",
-    "logs": "firebase functions:log",
-    "install-chrome": "export $(cat .env | xargs) && node node_modules/puppeteer/install.js"
+    "logs": "firebase functions:log"
   },
   "engines": {
     "node": "16"
