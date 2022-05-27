@@ -66,4 +66,3 @@ node_modules/
 .env
 
 .idea
-functions/service-account-file.json
