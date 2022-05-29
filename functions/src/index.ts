@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import * as GoogleFunctions from "firebase-functions";
 import {equal} from "./compare";
 import Database from "./database";
+import {day, month, MONTHS} from "./date";
 import {pretty} from "./formatter";
 import {Apartment} from "./interface";
 import Mailer from "./mail";
@@ -17,12 +18,16 @@ const SENDER_EMAIL = process.env.SENDER_EMAIL || "";
 const SENDER_PASSWORD = process.env.SENDER_PASSWORD || "";
 const GOOGLE_APPLICATION_CREDENTIALS =
     process.env.GOOGLE_APPLICATION_CREDENTIALS || "";
+const VERBOSE = false;
 
 
 const isDesiredApartment = (apartment: Apartment) =>
-  apartment.beds === 2 && apartment.baths === 2 && !apartment.available;
+  apartment.beds === 2 &&
+    apartment.baths === 2 &&
+    apartment.available &&
+    month(apartment.availableDate!) >= MONTHS.JULY &&
+    day(apartment.availableDate!) >= 6;
 
-const VERBOSE = false;
 
 const main = (
     request?: GoogleFunctions.https.Request,
